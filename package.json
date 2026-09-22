@@ -1,0 +1,68 @@
+{
+ "name": "zhilian-recruitment-desktop",
+ "version": "0.1.0",
+ "private": true,
+ "description": "智联招聘桌面工作台",
+ "author": "Local",
+ "main": "dist-desktop/main.cjs",
+ "scripts": {
+  "dev": "vite --host 127.0.0.1",
+  "typecheck": "tsc --noEmit",
+  "build": "vite build && node scripts/build.mjs",
+  "start": "electron .",
+  "package:mac": "pnpm build && electron-builder --mac dir",
+  "package:win": "pnpm build && electron-builder --win portable",
+  "test": "bun test",
+  "audit:react": "react-doctor ."
+ },
+ "dependencies": {
+  "antd": "^5.27.0",
+  "lucide-react": "^0.468.0",
+  "playwright": "1.62.1",
+  "react": "^19.1.0",
+  "react-dom": "^19.1.0",
+  "sql.js": "^1.13.0",
+  "unzipper": "0.12.5",
+  "zod": "^4.0.0"
+ },
+ "devDependencies": {
+  "@types/bun": "^1.4.2",
+  "@types/node": "^25.0.0",
+  "@types/react": "^19.1.0",
+  "@types/react-dom": "^19.1.0",
+  "@types/sql.js": "^1.4.9",
+  "@types/unzipper": "0.10.11",
+  "@vitejs/plugin-react": "^4.7.0",
+  "electron": "^41.0.0",
+  "electron-builder": "^26.0.0",
+  "esbuild": "^0.25.0",
+  "react-doctor": "latest",
+  "react-grab": "latest",
+  "react-scan": "latest",
+  "typescript": "^5.9.3",
+  "vite": "^7.0.0"
+ },
+ "build": {
+  "appId": "local.recruitment.workbench",
+  "productName": "招聘工作台",
+  "directories": {
+   "output": "release"
+  },
+  "files": [
+   "dist/**/*",
+   "dist-desktop/**/*",
+   "package.json"
+  ],
+  "asarUnpack": [
+   "node_modules/playwright*/**/*",
+   "node_modules/sql.js/dist/sql-wasm.wasm"
+  ],
+  "mac": {
+   "category": "public.app-category.business",
+   "identity": null
+  },
+  "win": {
+   "target": "portable"
+  }
+ }
+}
